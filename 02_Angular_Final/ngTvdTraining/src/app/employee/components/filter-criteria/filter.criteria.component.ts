@@ -1,18 +1,22 @@
 import {
+  AfterViewInit,
   Component,
-  OnInit,
-  Input,
-  Output,
+  ElementRef,
   EventEmitter,
+  Input,
   OnChanges,
-  SimpleChanges
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild
 } from '@angular/core';
+import { ParamService } from '../../services';
 
 @Component({
   selector: 'app-filter-criteria',
   templateUrl: 'filter-criteria.component.html'
 })
-export class FilterCriteriaComponent implements OnInit, OnChanges {
+export class FilterCriteriaComponent implements OnInit, OnChanges, AfterViewInit {
   private _hitCount: number;
   get hitCount(): number {
     return this._hitCount;
@@ -31,32 +35,47 @@ export class FilterCriteriaComponent implements OnInit, OnChanges {
   @Output()
   valueChange: EventEmitter<string> = new EventEmitter<string>();
 
+  @ViewChild('searchInput')
+  input: ElementRef;
+
+  // Working with Observable
+  // @ViewChild(NgModel)
+  // inputModel: NgModel;
+
   hitCountMessage: string;
 
   // Getter / Setter Way
-  private _listFilter: string;
   public get listFilter(): string {
-    return this._listFilter;
+    return this.paramService.keyword;
   }
   public set listFilter(v: string) {
-    this._listFilter = v;
-    this.valueChange.emit(this._listFilter);
+    this.paramService.keyword = v;
+    this.valueChange.emit(v);
   }
 
-  constructor() {}
+  constructor(private paramService: ParamService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Working with Observable
+    // this.inputModel.valueChanges.subscribe(val => {
+    //   console.log(val);
+    // });
+  }
 
   // ngOnChanges Way
-  //   ngOnChanges(changes: SimpleChanges) {
-  //     if (changes['hitCount']) {
-  //       if (this._hitCount === 0) {
-  //         this.hitCountMessage = 'no employees found.';
-  //       } else {
-  //         this.hitCountMessage = `${this._hitCount} hits`;
-  //       }
-  //     }
-  //   }
+  ngOnChanges(changes: SimpleChanges) {
+    //     if (changes['hitCount']) {
+    //       if (this._hitCount === 0) {
+    //         this.hitCountMessage = 'no employees found.';
+    //       } else {
+    //         this.hitCountMessage = `${this._hitCount} hits`;
+    //       }
+    //     }
+  }
+
+  ngAfterViewInit(): void {
+    this.input.nativeElement.focus();
+  }
 
   // two-way databinding, the long way
   onValueChange(value: string) {

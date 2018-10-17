@@ -53,6 +53,16 @@ footer {
 .panel-primary > .panel-heading {
   background-color: #c92c21;
   border-color: #c92c21;
+  padding: 5px;
+  color: white;
+}
+.list-group-item {
+  padding: 0.35rem 1.05rem;
+}
+.list-group-item.active {
+  color: #fff;
+  background-color: gray;
+  border-color: #c92c21;
 }
 
 .btn-primary {
@@ -70,6 +80,17 @@ footer {
 .selected {
   background-color: #8c0000 !important;
   color: #fff !important;
+}
+
+.panel {
+  padding: 10px;
+  border: 1px solid #c92c21;
+}
+.panel-body {
+  margin-top: 10px;
+}
+.panel-footer {
+  margin-top: 15px;
 }
 
 /* Fade transition

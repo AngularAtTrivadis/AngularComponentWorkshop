@@ -2,7 +2,7 @@
     <div class="col-md-2">Search:</div>
     <div class="col-md-6">
         <!-- with getter / setter -->
-        <input type="search" [(ngModel)]="listFilter" class="form-control" />
+        <input type="search" #searchInput [(ngModel)]="listFilter" class="form-control" />
         <!-- two-way databinding, the long way -->
         <!-- <input type="search" [ngModel]="listFilter" (ngModelChange)="onValueChange($event)" class="form-control" /> -->
     </div>

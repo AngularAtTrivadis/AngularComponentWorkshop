@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanDeactivate, Router, RouterStateSnapshot } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  CanDeactivate,
+  Router,
+  RouterStateSnapshot
+} from '@angular/router';
 import { EmployeeComponent } from './../containers/employee/employee.component';
 
 @Injectable()
@@ -16,6 +22,6 @@ export class EmployeeEditGuard implements CanActivate, CanDeactivate<EmployeeCom
     }
   }
   canDeactivate(component: EmployeeComponent): boolean {
-    return confirm(`Navigate away and lose all changes?`);
+    return true; // confirm(`Navigate away and lose all changes?`);
   }
 }

@@ -8,6 +8,7 @@ import {
 import { Injectable } from '@angular/core';
 import 'rxjs/add/observable/throw';
 import { Observable } from 'rxjs/Observable';
+import { _throw } from 'rxjs/observable/throw';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()
@@ -26,7 +27,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         }
 
         // return the error to the method that called it
-        return Observable.throw(error);
+        return _throw(error);
       })
     );
   }
